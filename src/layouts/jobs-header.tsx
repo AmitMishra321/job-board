@@ -60,7 +60,7 @@ const JobsHeader = ({ searchParams }: { searchParams: JobQuerySchemaType }) => {
   }, [formValues, searchParams, setQueryParams]);
 
   return (
-    <div className="flex flex-col  gap-5 px-5">
+    <div className="flex flex-col md:flex-row gap-5 px-5 mb-5 ">
       <Form {...form}>
         <form className="w-full grid grid-cols-[1fr_auto] ">
           <FormField
@@ -72,7 +72,7 @@ const JobsHeader = ({ searchParams }: { searchParams: JobQuerySchemaType }) => {
                   <Input
                     placeholder="Search by title or company name"
                     {...field}
-                    className="rounded-full p-5 py-6  dark:bg-neutral-900 truncate"
+                    className="rounded-full p-5 py-5  dark:bg-neutral-900 truncate z-50"
                   />
                 </FormControl>
                 <FormMessage />
@@ -82,7 +82,7 @@ const JobsHeader = ({ searchParams }: { searchParams: JobQuerySchemaType }) => {
         </form>
       </Form>
 
-      <div className="flex gap-5 max-sm:justify-between justify-end">
+      <div className="flex gap-5 max-sm:justify-between justify-start">
         {isHome && (
           <div className={cn('flex items-center px-1 max-sm:hidden ', {})}>
             <Popover>
@@ -111,11 +111,8 @@ const JobsHeader = ({ searchParams }: { searchParams: JobQuerySchemaType }) => {
           </Drawer>
         )}
 
-        <Select
-          onValueChange={sortChangeHandler}
-          defaultValue={searchParams.sortby}
-        >
-          <SelectTrigger className="w-[180px] rounded-full dark:bg-neutral-900 p-3 py-4">
+        <Select onValueChange={sortChangeHandler} value={searchParams.sortby}>
+          <SelectTrigger className="w-[180px]  rounded-full dark:bg-neutral-900 p-3 py-4">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent className="rounded-xl dark:bg-neutral-900">

@@ -1,5 +1,6 @@
 import AllJobs from '@/components/all-jobs';
 import Loader from '@/components/loader';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import JobFilters from '@/layouts/job-filters';
 import JobsHeader from '@/layouts/jobs-header';
 import {
@@ -17,7 +18,7 @@ const page = async ({ searchParams }: { searchParams: JobQuerySchemaType }) => {
   }
   const parsedSearchParams = parsedData.data;
   return (
-    <div className="container flex gap-5 pt-5 mt-10">
+    <div className="container flex gap-5 pt-5 mt-10 ">
       <div className="hidden sm:block border  h-fit rounded-lg w-[310px] ">
         <JobFilters searchParams={parsedSearchParams} />
       </div>
@@ -31,7 +32,9 @@ const page = async ({ searchParams }: { searchParams: JobQuerySchemaType }) => {
             </div>
           }
         >
-          <AllJobs searchParams={parsedSearchParams} />
+          <ScrollArea className="h-[calc(100vh-90px)] pr-4 scrollbar-hide">
+            <AllJobs searchParams={parsedSearchParams} />
+          </ScrollArea>
         </Suspense>
       </div>
     </div>

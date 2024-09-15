@@ -18,12 +18,45 @@ type PaginatorProps = {
 const AllJobs = async ({ searchParams }: PaginatorProps) => {
   const jobs = await getAllJobs(searchParams);
   if (!jobs.status) {
-    return <div>Error {jobs.message}</div>;
+    return (
+      <div className="w-[94%] mx-auto flex flex-col items-center justify-center gap-4 rounded-lg border border-red-300 p-6 text-center mt-1 bg-red-50 dark:bg-red-900/20">
+        <Icon icon="alert" size={48} className="text-red-500" />
+        <h2 className="text-xl font-semibold text-red-700 dark:text-red-300">
+          Error Occurred
+        </h2>
+        <p className="text-red-600 dark:text-red-200">{jobs.message}</p>
+        <Link
+          href={APP_PATHS.JOBS}
+          className="mt-2 inline-flex items-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors"
+        >
+          Go Back to Jobs
+        </Link>
+      </div>
+    );
   }
   const totalPages =
     Math.ceil((jobs.additional?.totalJobs || 0) / JOBS_PER_PAGE) ||
     DEFAULT_PAGE;
   const currentPage = parseInt(searchParams.page?.toString()) || DEFAULT_PAGE;
+
+  if (jobs.additional?.jobs.length === 0) {
+    return (
+      <div className="w-[94%] mx-auto flex flex-col items-center justify-center gap-4 rounded-lg border p-6 text-center mt-1">
+        <Icon icon="filter" size={48} className="text-muted-foreground" />
+        <h2 className="text-xl font-semibold">No jobs found</h2>
+        <p className="text-muted-foreground">
+          Try adjusting your search or filter criteria to find more results.
+        </p>
+        <Link
+          href={APP_PATHS.JOBS}
+          className="mt-2 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+        >
+          Clear filters
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-background py-4 grid gap-3 w-full">
       {jobs.additional?.jobs.map((job) => {

@@ -35,7 +35,7 @@ const Header = () => {
       const windowHeight = window.innerHeight;
 
       const fadeStart = 0;
-      const fadeEnd = windowHeight * 0.3;
+      const fadeEnd = windowHeight * 0.01;
 
       if (scrollPosition <= fadeStart) {
         setOpacity(1);

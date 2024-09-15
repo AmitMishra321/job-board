@@ -24,6 +24,7 @@ import {
   User,
   LogOut,
   SlidersHorizontal,
+  AlertCircle,
 } from 'lucide-react';
 
 const icons = {
@@ -49,6 +50,7 @@ const icons = {
   profile: User,
   logout: LogOut,
   filter: SlidersHorizontal,
+  alert: AlertCircle,
 };
 export type IconType = typeof LucideIconType;
 export default icons;
